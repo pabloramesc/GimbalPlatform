@@ -61,5 +61,6 @@ License
 
 This project was developed at the Universidad Politécnica de Madrid, under the supervision of José Félix Alonso Alarcón. Special thanks to all the faculty and colleagues who provided guidance and support throughout the project.
 
+---
 
-This project is licensed under the GNU License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
