@@ -54,7 +54,6 @@ The project successfully demonstrates the construction and operation of a gimbal
 ## Future Work
 
 Future work could focus on enhancing the platform's precision, implementing additional orientation estimation algorithms, and exploring real-time data processing capabilities. Improvements in the mechanical design to reduce vibrations and further calibration of sensors could also contribute to more accurate measurements.
-License
 
 
 ## Acknowledgments
