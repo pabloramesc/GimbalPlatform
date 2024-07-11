@@ -11,13 +11,13 @@ The platform structure 3D model is available on https://www.thingiverse.com/thin
 
 The repository is organized as follows:
 
-- **designs**: Contains the 3D design files and the electrical for the platform components.
+- **designs**: Contains the technical drawings of the gimbal parts and the electrical schematics for the platform components connection.
 
-- **arduino**: Contains the Arduino source codes for controlling the platform and the IMU.
+- **arduino**: Contains the source codes for controlling the platform (Arduino UNO) and the IMU (Arduino Nano BLE33 Sense) microcontrollers.
 
 - **matlab**: Contains the Matlab scripts and functions used for data processing and algorithm comparison. It also includes datasets with the measurements recorded during tests. 
 
-- **pictures**: Contains images of the platform and experimental setup.
+- **pictures**: Contains images of the platform assembly process and experimental setup.
 
 
 ## Setup Details
@@ -28,7 +28,7 @@ The hardware setup for this project involves two key components: the Arduino Nan
 
 The Arduino Nano BLE33 Sense contains and 9-DOF IMU (Inertial Measurement Unit) which collect data of linear acceleration, angular velocity and magnetic field. This raw data is acquired through the internal I2C databus of the Arduino Nano BLE 33. Then, the measurements are processed and sent to the Arduino UNO using an external SPI bus.
 
-The Arduino UNO is tasked with controlling the servo motors, reading the angular position from the position encoders, and sending this data to the PC thought UART. The servo motors are controlled using PWM signals. The magnetic position encoders (AS5600) are configured and read using I2C. Because the Arduino UNO microcontroller has only one I2C bus, an I2C multiplexer is used. Then the readings from the BLE33's IMU, the angulars position from the encoders and a time reference are sent throught UART to the PC.
+The Arduino UNO is tasked with controlling the servo motors, reading the angular position from the position encoders, and sending this data to the PC thought UART. The servo motors are controlled using PWM signals. The magnetic position encoders (AS5600) are configured and read using I2C. Because the Arduino UNO microcontroller has only one I2C bus, an I2C multiplexer is used. Then the readings from the BLE33's IMU, the angular position from the encoders and a time reference are sent throught UART to the PC.
 
 The PC runs a Matlab script to process and store all data generated during the experiment and sent throught UART. These datasets are then processed using different AHRS algortihms to compare their performance.
 
