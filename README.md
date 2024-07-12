@@ -4,8 +4,7 @@ This repository contains the code and design files for the Gimbal Platform, deve
 
 The platform structure 3D model is available on https://www.thingiverse.com/thing:4964323
 
-![pic_platform](pictures/gimbal_overview.jpg)
-
+![](pictures/gimbal_overview.jpg)
 
 ## Project Structure
 
@@ -19,19 +18,17 @@ The repository is organized as follows:
 
 - **pictures**: Contains images of the platform assembly process and experimental setup.
 
-
 ## Setup Details
 
 The hardware setup for this project involves two key components: the Arduino Nano BLE33 Sense and the Arduino UNO.
 
-![pic_wiring](pictures/wiring_diagram.png)
+![](pictures/wiring_diagram.png)
 
 The Arduino Nano BLE33 Sense contains and 9-DOF IMU (Inertial Measurement Unit) which collect data of linear acceleration, angular velocity and magnetic field. This raw data is acquired through the internal I2C databus of the Arduino Nano BLE 33. Then, the measurements are processed and sent to the Arduino UNO using an external SPI bus.
 
 The Arduino UNO is tasked with controlling the servo motors, reading the angular position from the position encoders, and sending this data to the PC thought UART. The servo motors are controlled using PWM signals. The magnetic position encoders (AS5600) are configured and read using I2C. Because the Arduino UNO microcontroller has only one I2C bus, an I2C multiplexer is used. Then the readings from the BLE33's IMU, the angular position from the encoders and a time reference are sent throught UART to the PC.
 
 The PC runs a Matlab script to process and store all data generated during the experiment and sent throught UART. These datasets are then processed using different AHRS algortihms to compare their performance.
-
 
 ## Algorithms Implemented
 
@@ -45,16 +42,26 @@ The following orientation estimation algorithms are implemented and compared in 
 
 - **Extended Kalman Filter (EKF)**: The EKF is an advanced algorithm that uses a probabilistic approach to fuse data from the accelerometer, magnetometer, and gyroscope. It maintains a state estimate and a covariance matrix, updating them based on new sensor measurements and a prediction model. The EKF can effectively handle sensor noise and non-linearities, providing the most accurate and reliable orientation estimation among the algorithms implemented.
 
+For further details about these algorithms and their implementation, see https://github.com/Mayitzin/ahrs
 
 ## Results and Conclusion
 
-The project successfully demonstrates the construction and operation of a gimbal platform for the evaluation of inertial orientation systems. The extended Kalman filter (EKF) was found to be the most effective algorithm among those implemented, providing the best orientation estimation by effectively dealing with sensor noise and data fusion
+The project successfully demonstrates the construction and operation of a gimbal platform for the evaluation of inertial orientation systems. The extended Kalman filter (EKF) was found to be the most effective algorithm among those implemented, providing the best orientation estimation by effectively dealing with sensor noise and data fusion. The graph and the table below compare the deviation of the filters' estimation from the angles measured by the position encoders.
 
+![](pictures/err_slow.png)
+
+### Table: comparison of RMSE values for the slow turn test
+
+| Algorithms  | RMSE roll (°) | RMSE pitch (°) | RMSE yaw (°) |
+|-------------|---------------|----------------|--------------|
+| Acc + Mag   | 8.675         | 5.946          | 68.053       |
+| Gyr Integ   | 16.485        | 13.580         | 27.879       |
+| Comp Filt   | 10.524        | 8.845          | 56.341       |
+| EKF         | 7.241         | 5.596          | 13.112       |
 
 ## Future Work
 
 Future work could focus on enhancing the platform's precision, implementing additional orientation estimation algorithms, and exploring real-time data processing capabilities. Improvements in the mechanical design to reduce vibrations and further calibration of sensors could also contribute to more accurate measurements.
-
 
 ## Acknowledgments
 
